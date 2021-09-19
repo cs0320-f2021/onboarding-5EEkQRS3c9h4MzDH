@@ -27,5 +27,45 @@ public class MathBotTest {
     assertEquals(1, output, 0.01);
   }
 
-  // TODO: add more unit tests of your own
+  @Test
+  public void testNegative() {
+    MathBot matherator9003 = new MathBot();
+    double outputAddNegative = matherator9003.add(-5, -1);
+    double outputAddNegative2 = matherator9003.add(-5, 1);
+    assertEquals(-6, outputAddNegative, 0.01);
+    assertEquals(-4, outputAddNegative2, 0.01);
+  }
+
+  @Test
+  public void testZeroAdd() {
+    MathBot matherator9003 = new MathBot();
+    double outputAddZero = matherator9003.add(-5, 0);
+    double outputAddZero2 = matherator9003.add(0, 0);
+    double outputAddZero3 = matherator9003.add(0, 5);
+    assertEquals(-5, outputAddZero, 0.01);
+    assertEquals(0, outputAddZero2, 0.01);
+    assertEquals(5, outputAddZero3, 0.01);
+  }
+
+  @Test
+  public void testZeroSubtract() {
+    MathBot matherator9003 = new MathBot();
+    double outputAddZero = matherator9003.subtract(-5, 0);
+    double outputAddZero2 = matherator9003.subtract(0, 0);
+    double outputAddZero3 = matherator9003.subtract(0, 5);
+    assertEquals(-5, outputAddZero, 0.01);
+    assertEquals(0, outputAddZero2, 0.01);
+    assertEquals(-5, outputAddZero3, 0.01);
+  }
+
+  @Test
+  public void testSmallNumbers() {
+    MathBot matherator9003 = new MathBot();
+    double outputAdd = matherator9003.add(-0.005, 0);
+    double outputSubtractZero = matherator9003.subtract(0.0, 0);
+    double outputSubtract = matherator9003.subtract(0, 0.005);
+    assertEquals(-0.005, outputAdd, 0.00001);
+    assertEquals(0, outputSubtractZero, 0.00001);
+    assertEquals(-0.005, outputSubtract, 0.00001);
+  }
 }
