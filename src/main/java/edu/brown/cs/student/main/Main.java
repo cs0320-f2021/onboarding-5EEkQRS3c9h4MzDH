@@ -112,7 +112,7 @@ public final class Main {
             throw new NoSuchFieldException("");
           }
         } catch (Exception e) {
-          e.printStackTrace();
+//          e.printStackTrace();
           if (e instanceof FileNotFoundException) {
             System.out.println("ERROR: incorrect filepath");
           }
