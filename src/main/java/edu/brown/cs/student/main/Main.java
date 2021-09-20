@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
@@ -60,25 +61,43 @@ public final class Main {
       runSparkServer((int) options.valueOf("port"));
     }
 
-    // TODO: Add your REPL here!
     try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
       String input;
       while ((input = br.readLine()) != null) {
+        StarBot starBot = new StarBot(""); // initialize null StarBot
         try {
           input = input.trim();
           String[] arguments = input.split(" ");
-//          System.out.println(arguments[0]);
-          // TODO: complete your REPL by adding commands for addition "add" and subtraction
-          //  "subtract"
+          // handling math cases first
           MathBot mathBot = new MathBot();
-          if (arguments[0].equals("add") && arguments.length == 3) {
-            System.out.println(mathBot.add(Integer.parseInt(arguments[1]),
-                Integer.parseInt(arguments[2])));
-          } else if (arguments[0].equals("subtract") && arguments.length == 3) {
-            System.out.println(mathBot.subtract(Integer.parseInt(arguments[1]),
-                Integer.parseInt(arguments[2])));
+          if (arguments[0].equals("add") || arguments[0].equals("subtract")) {
+            if (arguments[0].equals("add") && arguments.length == 3) {
+              System.out.println(mathBot.add(Integer.parseInt(arguments[1]),
+                  Integer.parseInt(arguments[2])));
+            } else if (arguments[0].equals("subtract") && arguments.length == 3) {
+              System.out.println(mathBot.subtract(Integer.parseInt(arguments[1]),
+                  Integer.parseInt(arguments[2])));
+            } else {
+              throw new Exception("ERROR: Invalid operation");
+            }
+          } else if (arguments[0].equals("stars") || arguments[0].equals("naive_neighbors")) { // handle stars
+            if (arguments[0].equals("stars") && arguments.length == 2) {
+              starBot = new StarBot(arguments[1]);
+              System.out.println("Read " + starBot.getSize() + " stars from " + arguments[1]);
+              System.out.println(starBot.stars.get(0).getName());
+            } else if (arguments[0].equals("naive_neighbors") && arguments.length == 3) { // search case
+              Star starI = starBot.searchCoords(arguments[3]);
+              ArrayList<Star> sortedStars = starBot.updateSortDist(starI.getX(), starI.getY(), starI.getZ());
+              for (int i = 0; i < Integer.parseInt(arguments[2]); i++) {
+                System.out.println(sortedStars.get(i).getID());
+              }
+            } else if (arguments[0].equals("naive_neighbors") && arguments.length == 5) { // coord case
+              System.out.println("");
+            } else {
+              throw new Exception("ERROR: Invalid command");
+            }
           } else {
-            throw new Exception("ERROR: Invalid operation");
+            throw new Exception("ERROR: Invalid command");
           }
         } catch (Exception e) {
           // e.printStackTrace();
