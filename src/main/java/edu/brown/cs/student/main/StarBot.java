@@ -33,13 +33,20 @@ public class StarBot {
     return this.stars.size();
   }
 
-  public Star searchCoords(String starName) throws Exception {
-    for (Star star : this.stars) {
-      if (star.getName().equals(starName)) {
-        return star;
+  public Star searchCoords(String starName) throws NoSuchFieldException {
+    Star star = null;
+    for (Star curr : this.stars) {
+      if (curr.getName().equals(starName)) {
+        star = curr;
+        System.out.println("TESTING| Found");
       }
     }
-    throw new Exception("ERROR: Star not found");
+    if (star == null) {
+      System.out.println("TESTING| Not Found");
+      throw new NoSuchFieldException("star not found");
+    } else {
+      return star;
+    }
   }
 
   public ArrayList<Star> updateSortDist(double x, double y, double z) {
@@ -56,6 +63,7 @@ public class StarBot {
       return 0;
     };
     this.stars.sort(compareByDist);
+    System.out.println("TESTING| sorted");
     return this.stars;
   }
 }
