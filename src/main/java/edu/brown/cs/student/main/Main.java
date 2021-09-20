@@ -88,17 +88,21 @@ public final class Main {
               System.out.println("Read " + starBot.getSize() + " stars from " + arguments[1]);
             // search for star case
             } else if (arguments[0].equals("naive_neighbors") && arguments.length == 3) {
-              Star starI = starBot.searchCoords(arguments[2].replaceAll("^\"|\"$", ""));
+              Star starI = starBot.searchCoords(
+                  arguments[2].replaceAll("^\"|\"$", ""));
               System.out.println("TESTING|" + starI.getName());
-              ArrayList<Star> sortedStars = starBot.updateSortDist(starI.getX(), starI.getY(), starI.getZ());
-              for (int i = 1; i < Math.min(Integer.parseInt(arguments[1]) + 1, starBot.getSize() + 1); i++) {
+              ArrayList<Star> sortedStars = starBot.updateSortDist(
+                  starI.getX(), starI.getY(), starI.getZ());
+              for (int i = 1; i < Math.min(Integer.parseInt(arguments[1]) + 1,
+                  starBot.getSize() + 1); i++) {
                 System.out.println(sortedStars.get(i).getID());
               }
             // coordinate input case
             } else if (arguments[0].equals("naive_neighbors") && arguments.length == 5) {
               ArrayList<Star> sortedStars = starBot.updateSortDist(Double.parseDouble(arguments[2]),
                   Double.parseDouble(arguments[3]), Double.parseDouble(arguments[4]));
-              for (int i = 0; i < Math.min(Integer.parseInt(arguments[1]), starBot.getSize()); i++) {
+              for (int i = 0; i < Math.min(
+                  Integer.parseInt(arguments[1]), starBot.getSize()); i++) {
                 System.out.println(sortedStars.get(i).getID());
               }
             } else {
