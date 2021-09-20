@@ -53,7 +53,7 @@ public class Star {
 
   /**
    * A function that calculates and updates the distance between a Star and another coordinate.
-   *
+   up
    * @param xi - x coordinate of other object
    * @param yi - y coordinate of other object
    * @param zi - z coordinate of other object

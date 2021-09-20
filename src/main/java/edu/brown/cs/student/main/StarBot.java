@@ -34,6 +34,10 @@ public class StarBot {
     }
   }
 
+  protected ArrayList<Star> getStars() {
+    return this.stars;
+  }
+
   protected int getSize() {
     return this.stars.size();
   }
@@ -50,12 +54,12 @@ public class StarBot {
     for (Star curr : this.stars) {
       if (curr.getName().equals(starName)) {
         star = curr;
-        System.out.println("TESTING| Found");
+//        System.out.println("TESTING| Found");
       }
     }
     if (star == null) {
-      System.out.println("TESTING| Not Found");
-      throw new NoSuchFieldException("star not found");
+//      System.out.println("TESTING| Not Found");
+      throw new NoSuchFieldException("Star not found");
     } else {
       return star;
     }
@@ -84,7 +88,7 @@ public class StarBot {
       return 0;
     };
     this.stars.sort(compareByDist);
-    System.out.println("TESTING| sorted");
+//    System.out.println("TESTING| sorted");
     return this.stars;
   }
 }
